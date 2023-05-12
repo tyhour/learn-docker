@@ -43,10 +43,14 @@ After Docker is installed, now you can run the following command for automatical
 
 ```
 cd ~
+sudo apt-get update
+sudo apt-get install git git-lfs -y
 git clone https://github.com/tyhour/learn-docker.git
 cd learn-docker
 docker compose build --no-cache && docker compose up --force-recreate -d
 ```
+
+***Note [git-lfs](https://git-lfs.com/) for clone or push large file from git
 
 After running the Docker command, you should have containers as below:
 
