@@ -1,0 +1,5 @@
+FROM openjdk:11
+WORKDIR /app/spring
+COPY project/spring/registration-v2.jar ./ROOT.jar
+EXPOSE 8080
+ENTRYPOINT ["java", "-jar", "ROOT.jar"]

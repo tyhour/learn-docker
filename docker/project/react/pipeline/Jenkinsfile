@@ -1,0 +1,47 @@
+pipeline{
+    agent { label 'master' }
+    
+    tools{
+        nodejs 'nodejs-v16.18.1'
+    }
+
+    stages{
+        
+        /*
+        stage("Built Project"){
+            steps{
+                sh 'npm install'
+                sh 'npm run build'
+            }
+        }
+        */
+        stage("Build Docker Image"){
+            steps{
+                /*
+                withCredentials([usernamePassword(credentialsId: 'dockerhub-auth', passwordVariable: 'PASSWORD', usernameVariable: 'USERNAME')]) {
+                    sh "docker build -t xeng/kube-reactjs:${BUILD_NUMBER} ."
+                    sh "docker login -u ${USERNAME} -p ${PASSWORD}"
+                    sh 'docker push xeng/kube-reactjs:${BUILD_NUMBER}'
+                }
+                sh 'docker logout'
+                */
+                
+                script{
+                    docker.withRegistry('', 'dockerhub-auth') {
+                        def customImage = docker.build("xeng/react-router:${BUILD_NUMBER}")
+                        /* Push the container to the custom Registry */
+                        customImage.push()
+                    }
+                }
+                sh 'docker logout'
+
+                //Trigger to build other job => Get value: "${params.VERSION}"
+                build job: 'frontend-argocd', parameters: [
+                    string(name: 'VERSION', value: "${BUILD_NUMBER}")
+                ]
+            }
+        }
+
+        
+    }
+}
