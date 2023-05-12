@@ -9,7 +9,7 @@
     -   [Spring Dockerfile](#spring-dockerfile)
     -   [React Dockerfile](#react-dockerfile)
     -   [Launch Spring Project](#launch-spring-project)
-    -   [Launch React project](#launch-react-project)
+    -   [Launch React Project](#launch-react-project)
   
 
 ## Usage
