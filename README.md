@@ -41,7 +41,12 @@ Docker compose file we use for combination all docker images. Example we have 3 
 
 After Docker is installed, now you can run the following command for automatically to create containers image.
 
-`docker compose build --no-cache && docker compose up --force-recreate -d`
+```
+cd ~
+git clone https://github.com/tyhour/learn-docker.git
+cd learn-docker
+docker compose build --no-cache && docker compose up --force-recreate -d
+```
 
 After running the Docker command, you should have containers as below:
 
