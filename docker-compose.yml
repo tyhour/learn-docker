@@ -35,6 +35,16 @@ services:
       - "3001:3000"
     networks:
       - my-net
+  nexus:
+    container_name: "nexus-cont"
+    restart: always
+    image: sonatype/nexus3
+    volumes:
+      - "nexus-data:/nexus-data"
+    ports:
+      - "8081:8081"
+      - "5000:5000"
+    user: root
 volumes:
   pg-db:
   app-files:
